@@ -17,27 +17,23 @@ class ListaDobleCircular {
 
         if(this.ini == null) {
             this.ini = this.fin = nuevo;
+            this.ini.sig = this.fin;
+            this.ini.ant = this.fin;
+            this.fin.sig = this.ini;
+            this.fin.ant = this.ini;
         } else {
-            if(this.ini == this.fin) {
-                this.ini.sig = nuevo;
-                this.ini.ant = nuevo;
-                nuevo.ant = this.ini;
-                nuevo.sig = this.ini;
-                this.fin = nuevo;
-            } else {
-                let aux = this.ini.sig;
-                while(aux != this.ini) {
-                    if(aux == this.fin) {
-                        nuevo.sig = this.ini
-                        nuevo.ant = aux;
-                        aux.sig = nuevo;
-                        this.ini.ant = nuevo;
-                        this.fin = nuevo;
-                        break;
-                    }
-                    aux = aux.sig
+            let aux = this.ini.sig;
+            do {
+                if(aux == this.fin) {
+                    nuevo.sig = this.ini
+                    nuevo.ant = aux;
+                    aux.sig = nuevo;
+                    this.ini.ant = nuevo;
+                    this.fin = nuevo;
+                    break;
                 }
-            }
+                aux = aux.sig
+            } while(aux != this.ini);
         }
     }
 
@@ -74,5 +70,7 @@ listaDobleCircular.insertar(4);
 listaDobleCircular.insertar(5);
 listaDobleCircular.insertar(6);
 listaDobleCircular.insertar(7);
+console.log("Vuelta Horaria")
 listaDobleCircular.mostrar();
+console.log("Vuelta Antihoraria")
 listaDobleCircular.mostrarReversa();
